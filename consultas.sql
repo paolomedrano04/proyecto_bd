@@ -41,25 +41,6 @@ ORDER BY
     Cantidad_Vendida DESC
 LIMIT 5;
 
--- Productos menos vendidos
-SELECT 
-    p.modelo AS Modelo_Producto,
-    p.codigo AS Codigo_Producto,
-    SUM(iv.cantidad) AS Cantidad_Vendida
-FROM 
-    Producto p
-JOIN 
-    Item_vendido iv ON p.modelo = iv.Producto_modelo AND p.codigo = iv.Producto_codigo
-JOIN 
-    Venta v ON iv.Venta_codigo = v.codigo
-WHERE 
-    v.fecha BETWEEN '2024-01-01' AND '2024-12-31'
-GROUP BY 
-    p.modelo, p.codigo
-ORDER BY 
-    Cantidad_Vendida ASC
-LIMIT 5;
-
 -- Consulta 3
 SELECT 
     d.direccion AS Direccion_Despacho,
