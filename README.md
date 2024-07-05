@@ -26,7 +26,7 @@ Incluye los indices que se utilizarán para la optimización de consultas
 En este archivo está el código en Python para generar data que contiene +1 llave fóranea y no se pudo generar con DBeaver.
 
 
-##### importardatos.py
+#####  main.py
 
 
 En el archivo main.py se debe llamar a las funciones para generar la data. Este es el orden en el que se deben de llamar a estas.
