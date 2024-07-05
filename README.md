@@ -10,6 +10,8 @@ En este archivo está el código con las consultas incluidas y se da una descric
 -Consulta 3: Cantidad en stock y valor total por despacho y producto.
 -Consulta 4: Información de pagos realizados por clientes en el año 2024.
 
+Las consultas que se ejecutarán en los 4 esquemas de 1k,10k,100k,1M.
+
 #### inserciones.sql
 En este archivo se realizan las inserciones de las tablas fijas:
 - Empresa
@@ -50,9 +52,5 @@ generate_item_vendido(100, productos, ventas)
 generate_pago(100, ventas, datos_fijos['trabajadores'])
 
 ```
-#### consultas.sql
 
-Las consultas que se ejecutarán en los 4 esquemas.
 
-### Observaciones
-Las tablas Persona y Empresa son las únicas que son creadas en DBeaver.
