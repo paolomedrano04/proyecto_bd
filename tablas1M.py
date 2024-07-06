@@ -6,12 +6,12 @@ from faker import Faker
 
 # Conectar a la base de datos
 conn = psycopg2.connect(
-    database="bdmil",
+    database="proyecto",
     user="postgres",
     password="ut3c1719",
     host="localhost",
     port="5432",
-    options="-c search_path=bdpruebas"
+    options="-c search_path=bd1millon"
 )
 cursor = conn.cursor()
 
@@ -435,7 +435,7 @@ def generate_pago(n, ventas, trabajadores):
                 break
         monto = min(monto_restante, random.uniform(5, monto_restante))
         trabajador = random.choice(trabajadores)
-        trabajador_dni = trabajador[0]  # Obtener el DNI del trabajador desde los datos fijos
+        trabajador_dni = trabajador[0]
         cursor.execute("INSERT INTO Pago (Venta_codigo, metodo_pago, Trabajador_DNI, monto) VALUES (%s, %s, %s, %s)", (venta_codigo, metodo_pago, trabajador_dni, monto))
         print(f"Successfully inserted Pago for Venta {venta_codigo}")
 
@@ -444,17 +444,16 @@ insertar_datos_fijos()
 productos = insert_productos_fijos()
 
 #1M
-# Modificar la cantidad de registros a generar
-personas = generate_persona(100000)          # Generar 100,000 registros para la tabla Persona
-clientes = generate_cliente(50000, personas)           # Generar 50,000 registros para la tabla Cliente
-repartidores = generate_repartidor(20000, [p for p in personas if p not in clientes], [e[0] for e in datos_fijos['empresas'] if e[4] == 'Courier']) # Generar 20,000 registros para la tabla Repartidor
-ordenes = generate_orden_de_compra(50000, [e[0] for e in datos_fijos['empresas']], [d[0] for d in datos_fijos['despachos']]) # Generar 50,000 registros para la tabla Orden de compra
-comprobantes = generate_comprobante_de_pago(50000)     # Generar 50,000 registros para la tabla Comprobante de pago
-ventas = generate_venta(100000, repartidores, personas, comprobantes)  # Generar 100,000 registros para la tabla Venta
-generate_stock(10000, productos, [d[0] for d in datos_fijos['despachos']])            # Generar stock inicial para productos en despachos (10,000 registros)
-generate_abastecimiento(50000, productos, ordenes)    # Generar 50,000 registros para la tabla Abastecimiento
-generate_item_vendido_bloques(500000, productos, ventas)       # Generar 500,000 registros para la tabla Item vendido
-generate_pago(100000, ventas, datos_fijos['trabajadores'])            # Generar 100,000 registros para la tabla Pago
+personas = generate_persona(100000)
+clientes = generate_cliente(50000, personas)
+repartidores = generate_repartidor(20000, [p for p in personas if p not in clientes], [e[0] for e in datos_fijos['empresas'] if e[4] == 'Courier'])
+ordenes = generate_orden_de_compra(50000, [e[0] for e in datos_fijos['empresas']], [d[0] for d in datos_fijos['despachos']])
+comprobantes = generate_comprobante_de_pago(50000)
+ventas = generate_venta(100000, repartidores, personas, comprobantes)
+generate_stock(10000, productos, [d[0] for d in datos_fijos['despachos']])
+generate_abastecimiento(50000, productos, ordenes)
+generate_item_vendido_bloques(500000, productos, ventas)
+generate_pago(100000, ventas, datos_fijos['trabajadores']) 
 
 # Confirmar los cambios y cerrar la conexión
 conn.commit()

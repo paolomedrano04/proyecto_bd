@@ -435,7 +435,7 @@ def generate_pago(n, ventas, trabajadores):
                 break
         monto = min(monto_restante, random.uniform(5, monto_restante))
         trabajador = random.choice(trabajadores)
-        trabajador_dni = trabajador[0]  # Obtener el DNI del trabajador desde los datos fijos
+        trabajador_dni = trabajador[0]
         cursor.execute("INSERT INTO Pago (Venta_codigo, metodo_pago, Trabajador_DNI, monto) VALUES (%s, %s, %s, %s)", (venta_codigo, metodo_pago, trabajador_dni, monto))
         print(f"Successfully inserted Pago for Venta {venta_codigo}")
 
@@ -445,16 +445,16 @@ productos = insert_productos_fijos()
 
 #100K
 # Generar y poblar tablas
-personas = generate_persona(30000)          # Generar 300 registros para la tabla Persona
-clientes = generate_cliente(20000, personas)           # Generar 200 registros para la tabla Cliente
-repartidores = generate_repartidor(10000, [p for p in personas if p not in clientes], [e[0] for e in datos_fijos['empresas'] if e[4] == 'Courier']) # Generar 100 registros para la tabla Repartidor
-ordenes = generate_orden_de_compra(10000, [e[0] for e in datos_fijos['empresas']], [d[0] for d in datos_fijos['despachos']]) # Generar 100 registros para la tabla Orden de compra
-comprobantes = generate_comprobante_de_pago(10000)     # Generar 100 registros para la tabla Comprobante de pago
-ventas = generate_venta(10000, repartidores, personas, comprobantes)  # Generar 100 registros para la tabla Venta
-generate_stock(5000, productos, [d[0] for d in datos_fijos['despachos']])            # Generar stock inicial para productos en despachos
-generate_abastecimiento(10000, productos, ordenes)    # Generar 100 registros para la tabla Abastecimiento
-generate_item_vendido_bloques(10000, productos, ventas)       # Generar 100 registros para la tabla Item vendido
-generate_pago(10000, ventas, datos_fijos['trabajadores'])            # Generar 100 registros para la tabla Pago
+personas = generate_persona(30000)   
+clientes = generate_cliente(20000, personas)        
+repartidores = generate_repartidor(10000, [p for p in personas if p not in clientes], [e[0] for e in datos_fijos['empresas'] if e[4] == 'Courier'])
+ordenes = generate_orden_de_compra(10000, [e[0] for e in datos_fijos['empresas']], [d[0] for d in datos_fijos['despachos']])
+comprobantes = generate_comprobante_de_pago(10000)  
+ventas = generate_venta(10000, repartidores, personas, comprobantes)
+generate_stock(5000, productos, [d[0] for d in datos_fijos['despachos']])
+generate_abastecimiento(10000, productos, ordenes)  
+generate_item_vendido_bloques(10000, productos, ventas)  
+generate_pago(10000, ventas, datos_fijos['trabajadores'])
 
 # Confirmar los cambios y cerrar la conexión
 conn.commit()

@@ -2,7 +2,6 @@ import psycopg2
 
 def execute_queries(cursor, queries, settings):
     cursor.execute(settings)
-    print(f"{settings}\n")
     for query_index, query in enumerate(queries):
         print(f"----Consulta {query_index + 1}:")
         for attempt in range(5):
@@ -16,12 +15,12 @@ def execute_queries(cursor, queries, settings):
 
 # Conectar a la base de datos
 conn = psycopg2.connect(
-    database="bdmil",
+    database="proyecto",
     user="postgres",
     password="ut3c1719",
     host="localhost",
     port="5432",
-    options="-c search_path=bdpruebas"
+    options="-c search_path=bd1millon"
 )
 cursor = conn.cursor()
 

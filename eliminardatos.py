@@ -3,12 +3,12 @@ import psycopg2
 
 # Conectar a la base de datos
 conn = psycopg2.connect(
-    database="bdmil",
+    database="proyecto",
     user="postgres",
     password="ut3c1719",
     host="localhost",
     port="5432",
-    options="-c search_path=bdpruebas"
+    options="-c search_path=bd1k"
 )
 cursor = conn.cursor()
 

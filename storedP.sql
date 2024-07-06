@@ -1,4 +1,4 @@
--- Crear procedimientos almacenados necesarios
+-- Stored Procedure para las ventas
 CREATE OR REPLACE FUNCTION registrar_venta(
     p_codigo INT,
     p_fecha TIMESTAMP,
