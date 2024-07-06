@@ -1,5 +1,5 @@
 # Proyecto San Benito-Articulos Religiosos
-Repositorio del curso de CS-2031 para implementación de base de datos de San benito.
+Repositorio del curso de CS-2042 para implementación de base de datos de San benito.
 ### Archivos
 #### creacionTablasBD.sql
 En este archivo está el código para crear las tablas, keys, constraints y triggers.
