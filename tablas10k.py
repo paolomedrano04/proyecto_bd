@@ -11,7 +11,7 @@ conn = psycopg2.connect(
     password="ut3c1719",
     host="localhost",
     port="5432",
-    options="-c search_path=bd1k"
+    options="-c search_path=bdpruebas"
 )
 cursor = conn.cursor()
 
@@ -195,6 +195,7 @@ productos_fijos = [
     ('Denario', 'TK009', 16.50, 'Denario de San Pío de Pietrelcina'),
     ('Denario', 'TK010', 25.90, 'Denario de San Ignacio de Loyola')
 ]
+
 
 # Datos fijos para Empresa, Courier, Comercial, Trabajador, Despacho y Producto
 datos_fijos = {
@@ -434,17 +435,18 @@ def generate_pago(n, ventas, trabajadores):
 insertar_datos_fijos()
 productos = insert_productos_fijos()
 
+#10k
 # Generar y poblar tablas
-personas = generate_persona(300)          # Generar 300 registros para la tabla Persona
-clientes = generate_cliente(200, personas)           # Generar 200 registros para la tabla Cliente
-repartidores = generate_repartidor(100, [p for p in personas if p not in clientes], [e[0] for e in datos_fijos['empresas'] if e[4] == 'Courier']) # Generar 100 registros para la tabla Repartidor
-ordenes = generate_orden_de_compra(100, [e[0] for e in datos_fijos['empresas']], [d[0] for d in datos_fijos['despachos']]) # Generar 100 registros para la tabla Orden de compra
-comprobantes = generate_comprobante_de_pago(100)     # Generar 100 registros para la tabla Comprobante de pago
-ventas = generate_venta(100, repartidores, personas, comprobantes)  # Generar 100 registros para la tabla Venta
-generate_stock(50, productos, [d[0] for d in datos_fijos['despachos']])            # Generar stock inicial para productos en despachos
-generate_abastecimiento(100, productos, ordenes)    # Generar 100 registros para la tabla Abastecimiento
-generate_item_vendido(100, productos, ventas)       # Generar 100 registros para la tabla Item vendido
-generate_pago(100, ventas, datos_fijos['trabajadores'])            # Generar 100 registros para la tabla Pago
+personas = generate_persona(3000)          # Generar 300 registros para la tabla Persona
+clientes = generate_cliente(2000, personas)           # Generar 200 registros para la tabla Cliente
+repartidores = generate_repartidor(1000, [p for p in personas if p not in clientes], [e[0] for e in datos_fijos['empresas'] if e[4] == 'Courier']) # Generar 100 registros para la tabla Repartidor
+ordenes = generate_orden_de_compra(1000, [e[0] for e in datos_fijos['empresas']], [d[0] for d in datos_fijos['despachos']]) # Generar 100 registros para la tabla Orden de compra
+comprobantes = generate_comprobante_de_pago(1000)     # Generar 100 registros para la tabla Comprobante de pago
+ventas = generate_venta(1000, repartidores, personas, comprobantes)  # Generar 100 registros para la tabla Venta
+generate_stock(500, productos, [d[0] for d in datos_fijos['despachos']])            # Generar stock inicial para productos en despachos
+generate_abastecimiento(1000, productos, ordenes)    # Generar 100 registros para la tabla Abastecimiento
+generate_item_vendido(1000, productos, ventas)       # Generar 100 registros para la tabla Item vendido
+generate_pago(1000, ventas, datos_fijos['trabajadores'])            # Generar 100 registros para la tabla Pago
 
 # Confirmar los cambios y cerrar la conexión
 conn.commit()

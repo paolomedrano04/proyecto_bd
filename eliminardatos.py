@@ -1,4 +1,5 @@
-import psycopg2
+
+import psycopg2 
 
 # Conectar a la base de datos
 conn = psycopg2.connect(
@@ -7,7 +8,7 @@ conn = psycopg2.connect(
     password="ut3c1719",
     host="localhost",
     port="5432",
-    options="-c search_path=bd1k"
+    options="-c search_path=bdpruebas"
 )
 cursor = conn.cursor()
 
