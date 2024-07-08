@@ -131,7 +131,7 @@ print("------SIN INDICES (indices de postgres activados)---------------------")
 execute_queries(cursor, queries, settings_index)
 
 
-print("----------------------------------------------------")
+print("-------------------------------------------------------------")
 print("-----------CON INDICES (nuestros indices)---------------------")
 execute_queries(cursor, queries, settings_no_index)
 

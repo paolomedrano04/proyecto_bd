@@ -1,4 +1,4 @@
-set search_path to bd1k;
+set search_path to bd1millon;
 
 -- Tabla Persona
 CREATE TABLE Persona (
